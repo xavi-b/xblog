@@ -6,3 +6,5 @@ HEADERS += \
 SOURCES += \
     $$PWD/filelogger.cpp \
     $$PWD/logger.cpp
+
+INCLUDEPATH += $$PWD
