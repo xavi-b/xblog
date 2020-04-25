@@ -22,6 +22,12 @@ struct Log
     LogLevel level;
     QString text;
 
+    Log()
+        : dateTime(QDateTime::currentDateTimeUtc())
+    {
+
+    }
+
     Log(LogLevel level, QString const& text)
         : level(level), text(text), dateTime(QDateTime::currentDateTimeUtc())
     {
