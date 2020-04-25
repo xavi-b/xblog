@@ -18,9 +18,9 @@ static_assert(sizeof(LogLevelNames)/sizeof(char*) == LogLevel::__COUNT, "Sizes d
 
 struct Log
 {
-    QDateTime dateTime;
     LogLevel level;
     QString text;
+    QDateTime dateTime;
 
     Log()
         : dateTime(QDateTime::currentDateTimeUtc())
@@ -42,7 +42,7 @@ struct Log
 
     QString toString() const
     {
-        return QString("%1 [%2] %3").arg(this->dateTime.toString(Qt::ISODateWithMs)).arg(LogLevelNames[this->level]).arg(this->text);
+        return QString("%1 [%2] %3").arg(this->dateTime.toString(Qt::ISODateWithMs)).arg(LogLevelNames[this->level], 10).arg(this->text);
     }
 };
 

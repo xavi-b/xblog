@@ -5,6 +5,17 @@ namespace XB
 
 void FileLogger::logWrittenHandler(Log const& log)
 {
+    if(!this->currentLogFile.isOpen())
+    {
+        this->currentLogFile.setFileName(this->getCurrentLogFilename());
+        if(!this->currentLogFile.open(QIODevice::Append | QIODevice::Text | QIODevice::ReadWrite))
+        {
+            emit fileError(this->currentLogFile.error());
+            this->quit();
+            return;
+        }
+    }
+
     if(this->currentLogFile.isOpen() && this->currentLogFile.size() > this->logFileMaxSize)
     {
         this->currentLogFile.close();
@@ -17,7 +28,7 @@ void FileLogger::logWrittenHandler(Log const& log)
     {
         QTextStream out(&this->currentLogFile);
         out.setCodec("UTF-8");
-        out << log.toString();
+        out << log.toString() << "\r\n";
     }
 }
 
@@ -54,13 +65,6 @@ QString FileLogger::getCurrentLogFilename() const
 
 void FileLogger::run()
 {
-    this->currentLogFile.setFileName(this->getCurrentLogFilename());
-    if(!this->currentLogFile.open(QIODevice::Append | QIODevice::Text | QIODevice::ReadWrite))
-    {
-        emit fileError(this->currentLogFile.error());
-        return;
-    }
-
     this->exec();
 
     if(this->currentLogFile.isOpen())
@@ -71,7 +75,7 @@ FileLogger::FileLogger(QString const& dirPath, QObject* parent)
     : QThread(parent), dirPath(dirPath)
 {
     if(QCoreApplication::instance())
-        baseFilename = QCoreApplication::instance()->applicationName();
+        this->baseFilename = QCoreApplication::instance()->applicationName();
 
     connect(Logger::instance(), &Logger::logWritten, this, &FileLogger::logWrittenHandler);
 }
