@@ -1,11 +1,7 @@
-TEMPLATE        = lib
-CONFIG         += c++17
-DEFINES        += QT_DEPRECATED_WARNINGS
-QT             += core
-TARGET          = xblog
-DESTDIR         = $$PWD
+TEMPLATE = subdirs
 
 SUBDIRS += \
-    src/
+    lib
 
-include(src/src.pri)
+CONFIG += ordered
+
