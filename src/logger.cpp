@@ -12,7 +12,7 @@ Logger::Logger(QObject* parent)
 void Logger::logPrivate(Log const& log)
 {
 #ifdef QT_DEBUG
-    qDebug() << log.toString();
+    std::cout << log.toString().toStdString() << std::endl;
 #endif
 
     emit logWritten(log);

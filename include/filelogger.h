@@ -3,6 +3,7 @@
 
 #include <QCoreApplication>
 #include <QThread>
+#include <QTextStream>
 #include <QFile>
 #include <QDir>
 #include "logger.h"

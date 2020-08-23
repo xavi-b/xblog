@@ -1,7 +1,7 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include <QDebug>
+#include <iostream>
 #include <QObject>
 #include "log.h"
 
