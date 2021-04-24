@@ -4,11 +4,12 @@
 #include <iostream>
 #include <QObject>
 #include "log.h"
+#include "export.h"
 
 namespace XB
 {
 
-class Logger : public QObject
+class XBLOG_EXPORT Logger : public QObject
 {
     Q_OBJECT
 private:

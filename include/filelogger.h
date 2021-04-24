@@ -7,11 +7,12 @@
 #include <QFile>
 #include <QDir>
 #include "logger.h"
+#include "export.h"
 
 namespace XB
 {
 
-class FileLogger : public QThread
+class XBLOG_EXPORT FileLogger : public QThread
 {
     Q_OBJECT
 private:

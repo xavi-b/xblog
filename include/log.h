@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QDateTime>
+#include "export.h"
 
 namespace XB
 {
@@ -16,7 +17,7 @@ static const char* LogLevelNames[] = { "TRACE", "DEBUG", "INFO", "WARN", "ERROR"
 
 static_assert(sizeof(LogLevelNames)/sizeof(char*) == LogLevel::__COUNT, "Sizes do not match");
 
-struct Log
+struct XBLOG_EXPORT Log
 {
     LogLevel level;
     QString text;

@@ -10,6 +10,8 @@ target.path = /usr/lib/
 INSTALLS += target
 }
 
+DEFINES += XBLOG_LIBRARY
+
 SUBDIRS += \
     $$PWD/../include \
     $$PWD/../src
