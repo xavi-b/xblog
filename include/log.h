@@ -10,35 +10,42 @@ namespace XB
 
 enum LogLevel : char
 {
-    TRACE, DEBUG, INFO, WARN, ERROR, __COUNT
+    TRACE,
+    DEBUG,
+    INFO,
+    WARN,
+    ERROR,
+    __COUNT
 };
 
-static const char* LogLevelNames[] = { "TRACE", "DEBUG", "INFO", "WARN", "ERROR" };
+static const char* LogLevelNames[] = {"TRACE", "DEBUG", "INFO", "WARN", "ERROR"};
 
-static_assert(sizeof(LogLevelNames)/sizeof(char*) == LogLevel::__COUNT, "Sizes do not match");
+static_assert(sizeof(LogLevelNames) / sizeof(char*) == LogLevel::__COUNT, "Sizes do not match");
 
 struct XBLOG_EXPORT Log
 {
-    LogLevel level;
-    QString text;
+    LogLevel  level;
+    QString   text;
     QDateTime dateTime;
 
     Log()
         : dateTime(QDateTime::currentDateTimeUtc())
     {
-
     }
 
     Log(LogLevel level, QString const& text)
         : level(level), text(text), dateTime(QDateTime::currentDateTimeUtc())
     {
-
     }
 
     Log(QString const& text)
-        : level(LogLevel::DEBUG), text(text), dateTime(QDateTime::currentDateTimeUtc())
+        : Log(LogLevel::DEBUG, text)
     {
+    }
 
+    Log(char const* text)
+        : Log(LogLevel::DEBUG, text)
+    {
     }
 
     QString toString() const
@@ -47,6 +54,6 @@ struct XBLOG_EXPORT Log
     }
 };
 
-}
+} // namespace XB
 
 #endif // LOG_H
